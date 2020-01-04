@@ -21,6 +21,19 @@ export class GoogleMapComponent implements OnInit {
   };
   markers = [];
   infoContent = '';
+  image = {
+    url: 'https://developers.google.com/maps/documentation/javascript/examples/full/images/beachflag.png',
+    // This marker is 20 pixels wide by 32 pixels high.
+    size: new google.maps.Size(20, 32),
+    // The origin for this image is (0, 0).
+    origin: new google.maps.Point(0, 0),
+    // The anchor for this image is the base of the flagpole at (0, 32).
+    anchor: new google.maps.Point(0, 32)
+  };
+  shape = {
+    coords: [1, 1, 1, 20, 18, 20, 18, 1],
+    type: 'poly'
+  };
 
   constructor() {
   }
@@ -31,6 +44,7 @@ export class GoogleMapComponent implements OnInit {
         lat: position.coords.latitude,
         lng: position.coords.longitude,
       };
+      this.addMarker();
     });
   }
 
@@ -57,18 +71,21 @@ export class GoogleMapComponent implements OnInit {
   addMarker() {
     this.markers.push({
       position: {
-        lat: this.center.lat + ((Math.random() - 0.5) * 2) / 10,
-        lng: this.center.lng + ((Math.random() - 0.5) * 2) / 10,
+        lat: this.center.lat,
+        lng: this.center.lng,
       },
       label: {
         color: 'red',
-        text: 'Marker label ' + (this.markers.length + 1),
+        text: 'Home label ' + (this.markers.length + 1),
       },
-      title: 'Marker title ' + (this.markers.length + 1),
+      title: 'Home ' + (this.markers.length + 1),
       info: 'Marker info ' + (this.markers.length + 1),
       options: {
-        animation: google.maps.Animation.BOUNCE,
-      },
+        icon: this.image,
+        shape: this.shape,
+        animation: google.maps.Animation.DROP,
+        draggable: true
+      }
     });
   }
 
