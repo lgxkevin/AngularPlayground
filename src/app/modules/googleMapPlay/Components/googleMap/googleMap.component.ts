@@ -14,10 +14,12 @@ export class GoogleMapComponent implements OnInit {
   mapOptions: google.maps.MapOptions = {
     mapTypeId: 'hybrid',
     zoomControl: false,
-    scrollwheel: false,
+    scrollwheel: true,
     disableDoubleClickZoom: true,
+    streetViewControl: true,
     maxZoom: 15,
-    minZoom: 8
+    minZoom: 8,
+    fullscreenControl: true
   };
   markers = [];
   infoContent = '';
